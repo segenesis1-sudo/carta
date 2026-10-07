@@ -2,8 +2,8 @@ const host = window.location.hostname;
 const pathParts = window.location.pathname.split("/");
 
 // Dynamic detection of GitHub URL parts
-let USER = "tilo-restocafe"; 
-let REPO = "cartaaguero";     
+let USER = "segenesis1"; 
+let REPO = "carta";     
 
 if (host.includes(".github.io")) {
     USER = host.split(".")[0];
