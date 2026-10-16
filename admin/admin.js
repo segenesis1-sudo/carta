@@ -1,13 +1,13 @@
 const host = window.location.hostname;
-const pathParts = window.location.pathname.split("/");
+const pathParts = window.location.pathname.split("/").filter(Boolean);
 
 // Dynamic detection of GitHub URL parts
-let USER = "segenesis1"; 
-let REPO = "carta";     
+let USER = "segenesis1-sudo";
+let REPO = "catawhatsap";
 
 if (host.includes(".github.io")) {
     USER = host.split(".")[0];
-    REPO = pathParts[1] || "";
+    REPO = pathParts[0] || (USER + ".github.io");
 }
 
 const FILE_PATH = "sugerencias.json";
@@ -56,15 +56,10 @@ function borrarTokenLocal() {
     }
 }
 
-// Adjust iframe src (local vs cloud)
+// Adjust iframe src (always relative to ensure local and cloud work smoothly)
 function inicializarIframe() {
     if (iframe) {
-        const isLocal = host === "localhost" || host === "127.0.0.1" || window.location.protocol === "file:";
-        if (isLocal) {
-            iframe.src = "../index.html";
-        } else {
-            iframe.src = `https://${USER}.github.io/${REPO}/`;
-        }
+        iframe.src = "../index.html";
     }
 }
 
@@ -168,14 +163,14 @@ async function cargarJSON() {
 
         estado.textContent = "Cargado con éxito ✅";
         estado.style.color = "#4a773c";
-        
+
         // Carga inicial en la vista previa
         setTimeout(actualizarVistaPrevia, 800);
     } catch (e) {
         console.error(e);
         estado.textContent = "Error al cargar sugerencias ❌";
         estado.style.color = "#b03a2e";
-        
+
         // Intentar cargar localmente si falla la API (por ejemplo, si no hay token o internet)
         try {
             const localRes = await fetch(`../${FILE_PATH}?t=${Date.now()}`);
@@ -381,7 +376,7 @@ async function guardarJSON() {
             shaActual = resData.content.sha; // Actualizar SHA actual para la próxima guardada
             estado.textContent = "Sugerencias guardadas en la nube ✅";
             estado.style.color = "#4a773c";
-            
+
             // Forzar actualización en tiempo real en el iframe
             actualizarVistaPrevia();
             alert("¡Cambios guardados con éxito en la nube! ✅");
@@ -444,7 +439,7 @@ function toggleAdminLock() {
     const group = document.getElementById('tokenControlGroup');
     const btn = document.getElementById('btnLockAdmin');
     if (!group || !btn) return;
-    
+
     if (group.style.display === 'flex') {
         group.style.display = 'none';
         btn.innerHTML = '🔒 Acceso Propietario';
@@ -512,7 +507,7 @@ document.querySelectorAll(".emoji-list button").forEach(btn => {
 
         textarea.focus();
         textarea.selectionStart = textarea.selectionEnd = start + emoji.length;
-        
+
         // Trigger live preview update
         autoResizeTextarea();
         guardarEstadoLocal();
