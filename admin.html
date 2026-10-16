@@ -7,15 +7,22 @@
     <title>Admin - Mozo Digital (Carta de Platos)</title>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
-            --primary-color: #f5eedc;    /* Soft Cream text */
-            --secondary-color: #c48d49;  /* Caramel Gold */
-            --accent-color: #9c6c40;     /* Cocoa Gold */
-            --bg-color: #3d2713;         /* Very dark chocolate */
-            --white: #291707;            /* Dark chocolate background */
+            --primary-color: #f5eedc;
+            /* Soft Cream text */
+            --secondary-color: #c48d49;
+            /* Caramel Gold */
+            --accent-color: #9c6c40;
+            /* Cocoa Gold */
+            --bg-color: #3d2713;
+            /* Very dark chocolate */
+            --white: #291707;
+            /* Dark chocolate background */
             --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.3);
             --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
             --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.7);
@@ -40,7 +47,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(30, 18, 8, 0.85); /* Dark veil */
+            background: rgba(30, 18, 8, 0.85);
+            /* Dark veil */
             z-index: -1;
             pointer-events: none;
         }
@@ -186,6 +194,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -222,7 +231,8 @@
             box-shadow: var(--shadow-sm);
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px 14px;
             vertical-align: middle;
             text-align: left;
@@ -332,9 +342,17 @@
             transform: translateY(0);
         }
 
-        .toast.ok { background: #3c7746; }
-        .toast.info { background: #2f5f8b; }
-        .toast.err { background: #b03a2e; }
+        .toast.ok {
+            background: #3c7746;
+        }
+
+        .toast.info {
+            background: #2f5f8b;
+        }
+
+        .toast.err {
+            background: #b03a2e;
+        }
 
         /* LOADING OVERLAY SCREEN */
         #loadingOverlay {
@@ -368,7 +386,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 850px) {
@@ -376,17 +396,26 @@
                 flex-direction: column;
                 align-items: stretch;
             }
+
             #actionButtons {
                 flex-direction: column;
             }
-            table, thead, tbody, th, td, tr {
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
                 display: block;
             }
+
             thead tr {
                 position: absolute;
                 top: -9999px;
                 left: -9999px;
             }
+
             tr {
                 border: 1px solid rgba(196, 141, 73, 0.2);
                 border-radius: 12px;
@@ -394,6 +423,7 @@
                 background: rgba(41, 23, 7, 0.95);
                 padding: 10px;
             }
+
             td {
                 border: none;
                 border-bottom: 1px solid rgba(196, 141, 73, 0.1);
@@ -401,9 +431,11 @@
                 padding-left: 35%;
                 text-align: right;
             }
+
             td:last-child {
                 border-bottom: none;
             }
+
             td::before {
                 position: absolute;
                 top: 50%;
@@ -416,12 +448,31 @@
                 font-size: 12px;
                 color: var(--secondary-color);
             }
-            td:nth-of-type(1)::before { content: "Imagen"; }
-            td:nth-of-type(2)::before { content: "Nombre"; }
-            td:nth-of-type(3)::before { content: "Descripción"; }
-            td:nth-of-type(4)::before { content: "Categoría"; }
-            td:nth-of-type(5)::before { content: "Precio"; }
-            td:nth-of-type(6)::before { content: "Acciones"; }
+
+            td:nth-of-type(1)::before {
+                content: "Imagen";
+            }
+
+            td:nth-of-type(2)::before {
+                content: "Nombre";
+            }
+
+            td:nth-of-type(3)::before {
+                content: "Descripción";
+            }
+
+            td:nth-of-type(4)::before {
+                content: "Categoría";
+            }
+
+            td:nth-of-type(5)::before {
+                content: "Precio";
+            }
+
+            td:nth-of-type(6)::before {
+                content: "Acciones";
+            }
+
             .rowActions {
                 justify-content: flex-end;
             }
@@ -437,11 +488,15 @@
         <div class="topRow">
             <div class="git-config">
                 <div class="git-title">📍 Datos del Repositorio de GitHub</div>
-                <div style="margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <div
+                    style="margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
                     <div><span class="small">Repositorio actual:</span> <b id="repoDisplay">cargando...</b></div>
-                    <button id="btnLockAdmin" onclick="toggleAdminLock()" style="padding: 4px 10px; font-size: 12px; background: rgba(196, 141, 73, 0.15); border: 1px solid rgba(196, 141, 73, 0.4); border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">🔒 Acceso Propietario</button>
+                    <button id="btnLockAdmin" onclick="toggleAdminLock()"
+                        style="padding: 4px 10px; font-size: 12px; background: rgba(196, 141, 73, 0.15); border: 1px solid rgba(196, 141, 73, 0.4); border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">🔒
+                        Acceso Propietario</button>
                 </div>
-                <div class="token-group" id="tokenControlGroup" style="display: none; flex-wrap: wrap; gap: 8px; align-items: center;">
+                <div class="token-group" id="tokenControlGroup"
+                    style="display: none; flex-wrap: wrap; gap: 8px; align-items: center;">
                     <label style="font-size:14px; font-weight:600;">GitHub Token:</label>
                     <input type="password" id="token" placeholder="Pegar Token" style="max-width:220px">
                     <button onclick="saveToken()">Guardar</button>
@@ -450,7 +505,8 @@
                 </div>
             </div>
             <div class="controls">
-                <input id="search" placeholder="Filtrar por nombre o categoría..." oninput="filterProducts()" style="min-width:240px">
+                <input id="search" placeholder="Filtrar por nombre o categoría..." oninput="filterProducts()"
+                    style="min-width:240px">
                 <button onclick="toggleForm()">➕ Nuevo Producto</button>
             </div>
         </div>
@@ -464,10 +520,12 @@
         <!-- FORMULARIO DE ALTA / EDICIÓN -->
         <form id="form">
             <input type="hidden" id="editId">
-            <h3 style="margin-top:0; border-bottom: 1px solid rgba(196, 141, 73, 0.2); padding-bottom:8px; font-family:'Playfair Display', serif;" id="formTitle">Agregar Nuevo Producto</h3>
+            <h3 style="margin-top:0; border-bottom: 1px solid rgba(196, 141, 73, 0.2); padding-bottom:8px; font-family:'Playfair Display', serif;"
+                id="formTitle">Agregar Nuevo Producto</h3>
             <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:15px">
                 <div>
-                    <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Nombre del Plato</label>
+                    <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Nombre del
+                        Plato</label>
                     <input id="nombre" type="text" style="width:100%;">
                 </div>
                 <div>
@@ -475,21 +533,23 @@
                     <input id="precio" type="text" placeholder="Solo números" style="width:100%;">
                 </div>
                 <div style="grid-column: 1 / -1">
-                    <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Descripción</label>
+                    <label
+                        style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Descripción</label>
                     <textarea id="descripcion" rows="2" style="width:100%;"></textarea>
                 </div>
 
                 <!-- CARGA DE IMAGEN CON DRAG & DROP -->
                 <div style="grid-column: 1 / -1">
-                    <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Imagen del Producto</label>
-                    <input type="file" id="imagenFile" accept="image/*" style="display:none" onchange="handleFileSelect(event)">
-                    <div id="dropZone" class="dropZone" 
-                         onclick="document.getElementById('imagenFile').click()"
-                         ondragover="handleDragOver(event)" 
-                         ondragleave="handleDragLeave(event)" 
-                         ondrop="handleDrop(event)">
+                    <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Imagen del
+                        Producto</label>
+                    <input type="file" id="imagenFile" accept="image/*" style="display:none"
+                        onchange="handleFileSelect(event)">
+                    <div id="dropZone" class="dropZone" onclick="document.getElementById('imagenFile').click()"
+                        ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)"
+                        ondrop="handleDrop(event)">
                         📸 <b id="dropText">Hacé clic aquí o arrastrá tu foto desde tu computadora</b>
-                        <div style="font-size:12px; color:var(--secondary-color); margin-top:4px">Se subirá automáticamente a la carpeta <code>img/</code> en GitHub</div>
+                        <div style="font-size:12px; color:var(--secondary-color); margin-top:4px">Se subirá
+                            automáticamente a la carpeta <code>img/</code> en GitHub</div>
                     </div>
                     <input type="hidden" id="imagen">
                     <img id="preview" class="previewImg" style="display:none">
@@ -499,46 +559,75 @@
                     <label style="font-size:13px; font-weight:600; display:block; margin-bottom:5px;">Categoría</label>
                     <input id="categoria" type="text" placeholder="Ej: Cafetería☕️" style="width:100%;">
                 </div>
-                
+
                 <!-- SECCIÓN TRADUCCIONES -->
-                <div style="grid-column: 1 / -1; margin-top: 10px; border-top: 1px dashed rgba(196, 141, 73, 0.25); padding-top: 15px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-                        <h4 style="margin: 0; color: var(--secondary-color); font-family: 'Playfair Display', serif; font-size: 16px; display: flex; align-items: center; gap: 6px;">🌐 Traducciones de Idioma (Opcional)</h4>
-                        <button type="button" onclick="autoTraducir()" style="background: var(--accent-color); font-size: 12px; padding: 6px 12px; border-radius: 8px; box-shadow: var(--shadow-sm);">✨ Auto-traducir con IA</button>
+                <div
+                    style="grid-column: 1 / -1; margin-top: 10px; border-top: 1px dashed rgba(196, 141, 73, 0.25); padding-top: 15px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                        <h4
+                            style="margin: 0; color: var(--secondary-color); font-family: 'Playfair Display', serif; font-size: 16px; display: flex; align-items: center; gap: 6px;">
+                            🌐 Traducciones de Idioma (Opcional)</h4>
+                        <button type="button" onclick="autoTraducir()"
+                            style="background: var(--accent-color); font-size: 12px; padding: 6px 12px; border-radius: 8px; box-shadow: var(--shadow-sm);">✨
+                            Auto-traducir con IA</button>
                     </div>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; background: rgba(0,0,0,0.15); padding: 15px; border-radius: 12px; border: 1px solid rgba(196, 141, 73, 0.15);">
+
+                    <div
+                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; background: rgba(0,0,0,0.15); padding: 15px; border-radius: 12px; border: 1px solid rgba(196, 141, 73, 0.15);">
                         <!-- ENGLISH SECTION -->
                         <div style="display: flex; flex-direction: column; gap: 8px;">
-                            <div style="font-weight: bold; color: var(--secondary-color); font-size: 13px; border-bottom: 1px solid rgba(196, 141, 73, 0.15); padding-bottom: 4px; display: flex; align-items: center; gap: 6px;">🇬🇧 Inglés (EN)</div>
+                            <div
+                                style="font-weight: bold; color: var(--secondary-color); font-size: 13px; border-bottom: 1px solid rgba(196, 141, 73, 0.15); padding-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                                🇬🇧 Inglés (EN)</div>
                             <div>
-                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Nombre (EN)</label>
-                                <input id="nombre_en" type="text" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
+                                <label
+                                    style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Nombre
+                                    (EN)</label>
+                                <input id="nombre_en" type="text"
+                                    style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
                             </div>
                             <div>
-                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Categoría (EN)</label>
-                                <input id="categoria_en" type="text" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
+                                <label
+                                    style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Categoría
+                                    (EN)</label>
+                                <input id="categoria_en" type="text"
+                                    style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
                             </div>
                             <div>
-                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Descripción (EN)</label>
-                                <textarea id="descripcion_en" rows="2" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box; resize: vertical;"></textarea>
+                                <label
+                                    style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Descripción
+                                    (EN)</label>
+                                <textarea id="descripcion_en" rows="2"
+                                    style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box; resize: vertical;"></textarea>
                             </div>
                         </div>
 
                         <!-- PORTUGUESE SECTION -->
                         <div style="display: flex; flex-direction: column; gap: 8px;">
-                            <div style="font-weight: bold; color: var(--secondary-color); font-size: 13px; border-bottom: 1px solid rgba(196, 141, 73, 0.15); padding-bottom: 4px; display: flex; align-items: center; gap: 6px;">🇧🇷 Portugués (PT)</div>
+                            <div
+                                style="font-weight: bold; color: var(--secondary-color); font-size: 13px; border-bottom: 1px solid rgba(196, 141, 73, 0.15); padding-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                                🇧🇷 Portugués (PT)</div>
                             <div>
-                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Nome (PT)</label>
-                                <input id="nombre_pt" type="text" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
+                                <label
+                                    style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Nome
+                                    (PT)</label>
+                                <input id="nombre_pt" type="text"
+                                    style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
                             </div>
                             <div>
-                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Categoria (PT)</label>
-                                <input id="categoria_pt" type="text" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
+                                <label
+                                    style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Categoria
+                                    (PT)</label>
+                                <input id="categoria_pt" type="text"
+                                    style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box;">
                             </div>
                             <div>
-                                <label style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Descrição (PT)</label>
-                                <textarea id="descripcion_pt" rows="2" style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box; resize: vertical;"></textarea>
+                                <label
+                                    style="font-size:11px; font-weight:600; display:block; margin-bottom:3px; color: #bca083;">Descrição
+                                    (PT)</label>
+                                <textarea id="descripcion_pt" rows="2"
+                                    style="width:100%; font-size:12px; padding: 8px 10px; box-sizing: border-box; resize: vertical;"></textarea>
                             </div>
                         </div>
                     </div>
@@ -571,38 +660,26 @@
     <div id="loadingOverlay">
         <div class="spinner"></div>
         <div><b style="font-size:22px;">Sincronizando Carta Multi-idioma...</b></div>
-        <div style="font-size:14px; margin-top:12px; color:#ddd">No cierres esta página. Se descargará un archivo de respaldo (.json) automáticamente.</div>
+        <div style="font-size:14px; margin-top:12px; color:#ddd">No cierres esta página. Se descargará un archivo de
+            respaldo (.json) automáticamente.</div>
     </div>
 
     <script>
-        // Helper global para búsqueda inteligente de imágenes en subcarpetas locales
-        window.handleImageError = function(img, originalSrc) {
-            if (!img.dataset.tryStep) {
-                img.dataset.tryStep = "1";
-            }
-            const step = parseInt(img.dataset.tryStep, 10);
-            const fileName = (originalSrc || '').split('/').pop();
-            const folders = ["cafe", "comids", "bebidas", "san"];
-            
-            if (step <= folders.length) {
-                const nextFolder = folders[step - 1];
-                img.dataset.tryStep = (step + 1).toString();
-                img.src = `img/${nextFolder}/${fileName}`;
-            } else {
-                img.src = "https://via.placeholder.com/60x60?text=Sin+Foto";
-                img.onerror = null;
-            }
+        // Helper global seguro para fallback de imágenes sin loops de red
+        window.handleImageError = function (img, originalSrc) {
+            img.onerror = null;
+            img.src = "img/logo.png";
         };
 
         const host = window.location.hostname;
-        const pathParts = window.location.pathname.split("/");
+        const pathParts = window.location.pathname.split("/").filter(Boolean);
 
-        let USERNAME = "segenesis1";
-        let REPO = "carta";
+        let USERNAME = "segenesis1-sudo";
+        let REPO = "catawhatsap";
 
         if (host.includes(".github.io")) {
             USERNAME = host.split(".")[0];
-            REPO = pathParts[1] || "";
+            REPO = pathParts[0] || (USERNAME + ".github.io");
         }
 
         document.getElementById('repoDisplay').innerText = `${USERNAME} / ${REPO}`;
@@ -663,7 +740,7 @@
         function toggleAdminLock() {
             const group = document.getElementById('tokenControlGroup');
             const btn = document.getElementById('btnLockAdmin');
-            
+
             if (group.style.display === 'flex') {
                 group.style.display = 'none';
                 btn.innerHTML = '🔒 Acceso Propietario';
@@ -837,16 +914,16 @@
                 ]);
 
                 if (!rES.ok) throw new Error('Error al cargar archivo maestro');
-                
+
                 const data = await rES.json();
                 if (!Array.isArray(data)) throw new Error('El JSON no contiene un array válido');
                 productos = data;
 
                 if (rEN.ok) {
-                    try { productosEN = await rEN.json(); } catch(e) { console.error("Error parseando EN_JSON", e); }
+                    try { productosEN = await rEN.json(); } catch (e) { console.error("Error parseando EN_JSON", e); }
                 }
                 if (rPT.ok) {
-                    try { productosPT = await rPT.json(); } catch(e) { console.error("Error parseando PT_JSON", e); }
+                    try { productosPT = await rPT.json(); } catch (e) { console.error("Error parseando PT_JSON", e); }
                 }
 
                 render(productos);
@@ -868,7 +945,7 @@
                         productos = await localRes.json();
                         if (localResEN.ok) productosEN = await localResEN.json();
                         if (localResPT.ok) productosPT = await localResPT.json();
-                        
+
                         render(productos);
                         showToast("Cargado offline (Solo Lectura) 🔌", "info");
                     } else {
@@ -899,7 +976,7 @@
 
                 tr.innerHTML = `
                     <td style="text-align:center">
-                        <img src="${imagen}" class="mini" onerror="handleImageError(this, '${imagen}')">
+                        <img src="${imagen}" class="mini" loading="lazy" onerror="handleImageError(this, '${imagen}')">
                     </td>
                     <td>
                         <input type="text" value="${nombre.replace(/"/g, '&quot;')}" placeholder="Nombre del plato">
@@ -972,7 +1049,7 @@
         function toggleForm() {
             const f = document.getElementById('form');
             const editId = document.getElementById('editId');
-            
+
             if (f.style.display === 'block' && !editId.value) {
                 f.style.display = 'none';
             } else {
@@ -982,7 +1059,7 @@
                 document.getElementById('formTitle').innerText = "Agregar Nuevo Producto";
                 document.getElementById('preview').style.display = 'none';
                 document.getElementById('imagen').value = '';
-                
+
                 document.getElementById('nombre_en').value = '';
                 document.getElementById('descripcion_en').value = '';
                 document.getElementById('categoria_en').value = '';
@@ -999,7 +1076,7 @@
             document.getElementById('imagen').value = '';
             document.getElementById('preview').style.display = 'none';
             document.getElementById('form').style.display = 'none';
-            
+
             document.getElementById('nombre_en').value = '';
             document.getElementById('descripcion_en').value = '';
             document.getElementById('categoria_en').value = '';
@@ -1025,14 +1102,14 @@
             const esNombre = document.getElementById('nombre').value.trim();
             const esDesc = document.getElementById('descripcion').value.trim();
             const esCat = document.getElementById('categoria').value.trim();
-            
+
             if (!esNombre) {
                 showToast("Escribe primero el nombre en español para poder traducir", "err");
                 return;
             }
-            
+
             showToast("Traduciendo con IA...", "info");
-            
+
             async function translateText(text, fromLang, toLang) {
                 if (!text) return "";
                 try {
@@ -1048,7 +1125,7 @@
                 }
                 return text;
             }
-            
+
             try {
                 const [enName, enDesc, enCat, ptName, ptDesc, ptCat] = await Promise.all([
                     translateText(esNombre, 'es', 'en'),
@@ -1058,17 +1135,17 @@
                     translateText(esDesc, 'es', 'pt'),
                     translateText(esCat, 'es', 'pt')
                 ]);
-                
+
                 document.getElementById('nombre_en').value = enName;
                 document.getElementById('descripcion_en').value = enDesc;
                 document.getElementById('categoria_en').value = enCat;
-                
+
                 document.getElementById('nombre_pt').value = ptName;
                 document.getElementById('descripcion_pt').value = ptDesc;
                 document.getElementById('categoria_pt').value = ptCat;
-                
+
                 showToast("¡Traducciones automáticas generadas! 🌐", "ok");
-            } catch(e) {
+            } catch (e) {
                 showToast("Error en el servicio de traducción", "err");
             }
         }
@@ -1177,7 +1254,7 @@
             document.getElementById('categoria_pt').value = pPT ? (pPT.categoria || '') : '';
 
             previewImage();
-            
+
             document.getElementById('formTitle').innerText = "Editar Producto (" + p.id + ")";
             document.getElementById('form').style.display = 'block';
             window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1253,7 +1330,7 @@
                 a.href = URL.createObjectURL(backupBlob);
                 a.download = `backup_menu_${USERNAME}_${new Date().toISOString().slice(0, 10)}.json`;
                 a.click();
-            } catch(e) {
+            } catch (e) {
                 console.error("Error al descargar backup:", e);
             }
 
@@ -1298,7 +1375,7 @@
                 try {
                     const syncedList = masterList.map(masterItem => {
                         const currentTr = (f.localList || []).find(x => x.id === masterItem.id) || {};
-                        
+
                         if (f.lang === 'EN') {
                             return {
                                 id: masterItem.id,
@@ -1343,7 +1420,7 @@
         }
 
         function irTeleprompter() {
-            window.open("https://tilo-restocafe.github.io/cartaaguero/admin/admin.html", "_blank");
+            window.open("./admin/admin.html", "_blank");
         }
 
         function irWhatsApp() {
@@ -1358,4 +1435,5 @@
         });
     </script>
 </body>
+
 </html>
