@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             list.innerHTML += `
       <div class="item">
-        <img src="${p.imagen}">
+        <img src="${p.imagen}" loading="lazy" onerror="this.onerror=null;this.src='img/logo.png'">
         <h3>${p.nombre}</h3>
         <p>${p.descripcion || ""}</p>
         <span class="price">$${p.precio}</span>
