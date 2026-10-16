@@ -38,7 +38,7 @@
 
         body {
             font-family: 'Outfit', sans-serif;
-            background: url("img/Fondo2.jpg") repeat;
+            background: url("img/fondo8.png") repeat;
             background-size: cover;
             background-attachment: fixed;
             margin: 0;
@@ -529,8 +529,15 @@
         }
 
         @keyframes wineFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
         }
 
         .wine-cta-text {
@@ -940,9 +947,17 @@
         }
 
         @keyframes bumpAnim {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.4); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.4);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         /* ================= MODAL / DRAWER DEL CARRITO ================= */
@@ -1605,7 +1620,8 @@
 
     <!-- ENLACE DIRECTO A CARTA DE VINOS -->
     <div class="wine-banner-container">
-        <a href="https://tilo-restocafe.github.io/vinos/" target="_blank" rel="noopener noreferrer" class="wine-cta-btn" id="wineCtaBtn" title="Ir a la Carta de Vinos">
+        <a href="https://tilo-restocafe.github.io/vinos/" target="_blank" rel="noopener noreferrer" class="wine-cta-btn"
+            id="wineCtaBtn" title="Ir a la Carta de Vinos">
             <div class="wine-cta-left">
                 <span class="wine-cta-icon">🍷</span>
                 <div class="wine-cta-text">
@@ -1687,28 +1703,15 @@
         // CONFIGURACIÓN DE LA SUCURSAL Y WHATSAPP
         // ==========================================
         const NOMBRE_LOCAL = "menuclick";
-        
+
         // 🔴 INGRESA AQUÍ TU NÚMERO DE WHATSAPP CON CÓDIGO DE PAÍS (sin +, espacios ni guiones)
         // Ejemplo Argentina: "5491123140119" / México: "5491123140119" / España: "5491123140119"
-        const NUMERO_WHATSAPP = "5491123140119"; 
+        const NUMERO_WHATSAPP = "5491123140119";
 
-        // Helper global para búsqueda inteligente de imágenes en subcarpetas locales
+        // Helper global seguro para fallback de imágenes sin loops de red
         window.handleImageError = function (img, originalSrc) {
-            if (!img.dataset.tryStep) {
-                img.dataset.tryStep = "1";
-            }
-            const step = parseInt(img.dataset.tryStep, 10);
-            const fileName = (originalSrc || '').split('/').pop();
-            const folders = ["cafe", "comids", "bebidas", "san"];
-
-            if (step <= folders.length) {
-                const nextFolder = folders[step - 1];
-                img.dataset.tryStep = (step + 1).toString();
-                img.src = `img/${nextFolder}/${fileName}`;
-            } else {
-                img.src = "https://via.placeholder.com/400x300?text=Sin+Imagen";
-                img.onerror = null;
-            }
+            img.onerror = null;
+            img.src = "img/logo.png";
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1826,14 +1829,14 @@
 
             // Detección dinámica de GitHub para soporte marca blanca
             const host = window.location.hostname;
-            const pathParts = window.location.pathname.split("/");
+            const pathParts = window.location.pathname.split("/").filter(Boolean);
 
-            let USER = 'segenesis1'; // Fallback por defecto
-            let REPO = 'carta';     // Fallback por defecto
+            let USER = 'segenesis1-sudo'; // Fallback por defecto
+            let REPO = 'catawhatsap';     // Fallback por defecto
 
             if (host.includes(".github.io")) {
                 USER = host.split(".")[0];
-                REPO = pathParts[1] || "";
+                REPO = pathParts[0] || (USER + ".github.io");
             }
 
             // Detección de desarrollo local (Localhost/127.0.0.1 o protocolo file://)
@@ -2176,20 +2179,29 @@
             // =============================================
             async function cargarTeleprompter() {
                 try {
-                    let url = `./sugerencias.json?t=${Date.now()}`;
+                    const cacheBust = `?t=${Date.now()}`;
                     let res;
-                    if (!isLocal) {
-                        const githubUrl = `https://raw.githubusercontent.com/${USER}/${REPO}/main/sugerencias.json?t=${Date.now()}`;
-                        try {
-                            res = await fetch(githubUrl, { cache: "no-store" });
-                            if (!res.ok) throw new Error("GitHub Raw returned non-OK status");
-                        } catch (err) {
-                            console.warn("GitHub Raw suggestions failed, falling back to local Pages path", err);
-                            res = await fetch(url, { cache: "no-store" });
-                        }
-                    } else {
-                        res = await fetch(url, { cache: "no-store" });
+
+                    // Prioridad 1: Carga desde Pages/local sin consumir tasa de GitHub
+                    try {
+                        res = await fetch(`./sugerencias.json${cacheBust}`, { cache: "no-store" });
+                    } catch (e) {
+                        res = null;
                     }
+
+                    // Prioridad 2: Fallback a GitHub Raw si no está disponible localmente
+                    if (!res || !res.ok) {
+                        if (!isLocal && USER && REPO) {
+                            const githubUrl = `https://raw.githubusercontent.com/${USER}/${REPO}/main/sugerencias.json${cacheBust}`;
+                            try {
+                                res = await fetch(githubUrl, { cache: "no-store" });
+                            } catch (err) {
+                                console.warn("GitHub Raw sugerencias fallback falló:", err);
+                            }
+                        }
+                    }
+
+                    if (!res || !res.ok) throw new Error("No se pudo cargar sugerencias.json");
                     const data = await res.json();
 
                     // Ajustar título y banner de forma genérica
@@ -2275,35 +2287,35 @@
                             : "productos-port.json";
 
                 try {
-                    let url = `./${archivo}?t=${Date.now()}`;
+                    const cacheBust = `?t=${Date.now()}`;
                     let res;
-                    if (!isLocal) {
-                        const githubUrl = `https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}?t=${Date.now()}`;
+
+                    // Prioridad 1: Carga directa desde el host (Pages o local) - ultra rápida y sin rate limit
+                    try {
+                        res = await fetch(`./${archivo}${cacheBust}`, { cache: "no-store" });
+                    } catch (e) {
+                        res = null;
+                    }
+
+                    // Fallback a productos.json local si el idioma solicitado no existe aún
+                    if ((!res || !res.ok) && archivo !== "productos.json") {
                         try {
-                            res = await fetch(githubUrl, { cache: "no-store" });
-                            if (!res.ok) throw new Error("GitHub Raw returned non-OK status");
-                        } catch (err) {
-                            console.warn("GitHub Raw products failed, falling back to local Pages path", err);
-                            res = await fetch(url, { cache: "no-store" });
-                        }
-                    } else {
-                        try {
-                            res = await fetch(url, { cache: "no-store" });
-                            if (!res.ok) throw new Error("Local file not found");
-                        } catch (err) {
-                            const githubUrl = `https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}?t=${Date.now()}`;
-                            res = await fetch(githubUrl, { cache: "no-store" });
+                            res = await fetch(`./productos.json${cacheBust}`, { cache: "no-store" });
+                        } catch (e) {
+                            res = null;
                         }
                     }
 
-                    if ((!res || !res.ok) && archivo !== "productos.json") {
-                        // Fallback a productos.json si el archivo en otro idioma aún no existe
-                        const fallbackUrl = isLocal ? `./productos.json?t=${Date.now()}` : `https://raw.githubusercontent.com/${USER}/${REPO}/main/productos.json?t=${Date.now()}`;
-                        try {
-                            res = await fetch(fallbackUrl, { cache: "no-store" });
-                        } catch {
-                            const fallbackGh = `https://raw.githubusercontent.com/${USER}/${REPO}/main/productos.json?t=${Date.now()}`;
-                            res = await fetch(fallbackGh, { cache: "no-store" });
+                    // Prioridad 2: Rescate desde GitHub Raw solo si la carga local falló
+                    if (!res || !res.ok) {
+                        if (!isLocal && USER && REPO) {
+                            try {
+                                const githubUrl = `https://raw.githubusercontent.com/${USER}/${REPO}/main/${archivo}${cacheBust}`;
+                                res = await fetch(githubUrl, { cache: "no-store" });
+                            } catch (err) {
+                                const fallbackGh = `https://raw.githubusercontent.com/${USER}/${REPO}/main/productos.json${cacheBust}`;
+                                res = await fetch(fallbackGh, { cache: "no-store" }).catch(() => null);
+                            }
                         }
                     }
 
