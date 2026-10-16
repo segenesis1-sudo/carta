@@ -1,7 +1,7 @@
 [
   {
     "nombre": "Café expresso",
-    "descripcion": "☕ Bienvenidos a Tilo Café — Agüero 2298🥐 Medialunas recién horneadas todo el día 📶 Wi-Fi gratis para nuestros clientes,🕘 Abierto todos los días de 8 a💳 Aceptamos débito, crédito y QR",
+    "descripcion": "cafe pocilo",
     "precio": "6000",
     "imagen": "img/1792111114819_cafe_jpg.jpg",
     "categoria": "Cafetería☕️",
@@ -11,7 +11,7 @@
     "nombre": "Café expresso jarrito",
     "descripcion": "Café americano",
     "precio": "3600",
-    "imagen": "img/1791295595059_americano_jpg.jpg",
+    "imagen": "img/1792111443705_americano_jpg.jpg",
     "categoria": "Cafetería☕️",
     "id": "prod0002"
   },
